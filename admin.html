@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - QuizMaster Arena</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <h1>QuizMaster Arena</h1>
+        <h2>Admin Dashboard</h2>
+
+        <p>Welcome, {{ session["username"] }}!</p>
+
+        <button onclick="location.href='/admin/questions'">
+            Manage Questions
+        </button>
+
+        <br><br>
+
+        <a href="/dashboard">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Categories - QuizMaster Arena</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="categories-container">
+        <h1>Choose a Quiz Category</h1>
+        <p>Select a category and test your knowledge!</p>
+
+        <div class="category-grid">
+            {% for category in categories %}
+                <div class="category-card">
+                    <h2>{{ category.category_name }}</h2>
+                    <p>{{ category.description }}</p>
+                    <a href="{{ url_for('quiz', category_id=category.category_id) }}" class="btn">Start Quiz</a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

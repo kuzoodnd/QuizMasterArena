@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuizMaster Arena - Quiz</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="quiz-container">
+
+        <div class="timer-container">
+    ⏱️ Time Remaining: 
+    <span id="timer">01:00</span>
+</div>
+
+        <h1>QuizMaster Arena</h1>
+
+        <p>Test your knowledge!</p>
+
+        <form method="POST">
+            <input type="hidden" name="quiz_question_ids" value="{% for question in questions %}{{ question.question_id }}{% if not loop.last %},{% endif %}{% endfor %}">
+
+            {% for question in questions %}
+
+            <div class="question-card">
+
+                <h2>
+                    {{ loop.index }}. {{ question.question }}
+                </h2>
+
+                <label>
+                    <input type="radio"
+                           name="question_{{ question.question_id }}"
+                           value="A"
+                           required>
+                    {{ question.option_a }}
+                </label>
+
+                <label>
+                    <input type="radio"
+                           name="question_{{ question.question_id }}"
+                           value="B">
+                    {{ question.option_b }}
+                </label>
+
+                <label>
+                    <input type="radio"
+                           name="question_{{ question.question_id }}"
+                           value="C">
+                    {{ question.option_c }}
+                </label>
+
+                <label>
+                    <input type="radio"
+                           name="question_{{ question.question_id }}"
+                           value="D">
+                    {{ question.option_d }}
+                </label>
+
+            </div>
+
+            {% endfor %}
+
+            <button type="submit">
+                Submit Quiz
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/categories">← Back to Categories</a>
+
+    </div>
+<script>
+
+    let timeLeft = 60;
+    const timer = document.getElementById("timer");
+    const quizForm = document.querySelector("form");
+
+    const countdown = setInterval(function () {
+
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        timer.textContent = minutes + ":" + seconds;
+
+        if (timeLeft <= 0) {
+
+            clearInterval(countdown);
+
+            alert("Time is up! Your quiz will be submitted.");
+
+            quizForm.submit();
+
+            return;
+        }
+
+        timeLeft--;
+
+    }, 1000);
+
+</script>
+</body>
+</html>

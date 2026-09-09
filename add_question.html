@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Question - QuizMaster Arena</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <h1>Add New Question</h1>
+        <p>Create a new quiz question.</p>
+
+        <form method="POST">
+
+            <label for="category_id">Category</label>
+
+            <select id="category_id" name="category_id" required>
+                <option value="">Select Category</option>
+
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">
+                        {{ category.category_name }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+            <label for="question">Question</label>
+            <input type="text"
+                   id="question"
+                   name="question"
+                   required>
+
+            <label for="option_a">Option A</label>
+            <input type="text"
+                   id="option_a"
+                   name="option_a"
+                   required>
+
+            <label for="option_b">Option B</label>
+            <input type="text"
+                   id="option_b"
+                   name="option_b"
+                   required>
+
+            <label for="option_c">Option C</label>
+            <input type="text"
+                   id="option_c"
+                   name="option_c"
+                   required>
+
+            <label for="option_d">Option D</label>
+            <input type="text"
+                   id="option_d"
+                   name="option_d"
+                   required>
+
+            <label for="correct_answer">Correct Answer</label>
+
+            <select id="correct_answer"
+                    name="correct_answer"
+                    required>
+
+                <option value="">Select Correct Answer</option>
+                <option value="A">Option A</option>
+                <option value="B">Option B</option>
+                <option value="C">Option C</option>
+                <option value="D">Option D</option>
+
+            </select>
+
+            <br><br>
+
+            <button type="submit">
+                Add Question
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/admin/questions">
+            ← Back to Manage Questions
+        </a>
+
+    </div>
+
+</body>
+</html>

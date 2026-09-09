@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster Arena - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+        <div class="dashboard-header">
+            <span class="badge">QuizMaster Arena</span>
+            <h1>Welcome, {{ username }}! 👋</h1>
+            <p>Ready to test your knowledge today?</p>
+        </div>
+
+        <div class="dashboard-actions">
+            <button class="btn btn-primary" onclick="location.href='/categories'">
+                🚀 Start Quiz
+            </button>
+
+            <button class="btn btn-secondary" onclick="location.href='/leaderboard'">
+                🏆 Leaderboard
+            </button>
+
+            <button class="btn btn-secondary" onclick="location.href='/history'">
+                📜 Quiz History
+            </button>
+
+            {% if session["role"] == "admin" %}
+                <button class="btn btn-admin" onclick="location.href='/admin'">
+                    ⚙️ Admin Panel
+                </button>
+            {% endif %}
+
+            <a href="/logout" class="logout-link">🚪 Logout</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

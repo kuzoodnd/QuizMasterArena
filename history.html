@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz History - QuizMaster Arena</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="history-container">
+
+        <h1>Quiz History</h1>
+        <p>Here are your previous quiz attempts.</p>
+
+        {% if attempts %}
+
+        <table class="history-table">
+
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Score</th>
+                    <th>Date Taken</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for attempt in attempts %}
+
+                <tr>
+                    <td>{{ attempt.category_name }}</td>
+
+                    <td>
+                        {{ attempt.score }} /
+                        {{ attempt.total_questions }}
+                    </td>
+
+                    <td>
+                        {{ attempt.date_taken }}
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>No quiz attempts yet.</p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/dashboard">← Back to Dashboard</a>
+
+    </div>
+
+</body>
+</html>

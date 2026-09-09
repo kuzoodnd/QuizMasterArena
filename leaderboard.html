@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leaderboard - QuizMaster Arena</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="history-container">
+
+        <h1>🏆 Leaderboard</h1>
+        <p>Top quiz scores</p>
+
+        {% if leaderboard %}
+
+        <table class="history-table">
+
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Category</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for player in leaderboard %}
+
+                <tr>
+
+                    <td>
+                        {% if loop.index == 1 %}
+                            🥇
+                        {% elif loop.index == 2 %}
+                            🥈
+                        {% elif loop.index == 3 %}
+                            🥉
+                        {% else %}
+                            {{ loop.index }}
+                        {% endif %}
+                    </td>
+
+                    <td>{{ player.username }}</td>
+
+                    <td>{{ player.category_name }}</td>
+
+                    <td>
+                        {{ player.score }} /
+                        {{ player.total_questions }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>No quiz attempts yet.</p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/dashboard">← Back to Dashboard</a>
+
+    </div>
+
+</body>
+</html>

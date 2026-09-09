@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Question - QuizMaster Arena</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <h1>Edit Question</h1>
+        <p>Update the quiz question below.</p>
+
+        <form method="POST">
+
+            <label for="category_id">Category</label>
+
+            <select id="category_id" name="category_id" required>
+
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}"
+                        {% if category.category_id == question.category_id %}
+                            selected
+                        {% endif %}>
+                        {{ category.category_name }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+            <label for="question">Question</label>
+            <input type="text"
+                   id="question"
+                   name="question"
+                   value="{{ question.question }}"
+                   required>
+
+            <label for="option_a">Option A</label>
+            <input type="text"
+                   id="option_a"
+                   name="option_a"
+                   value="{{ question.option_a }}"
+                   required>
+
+            <label for="option_b">Option B</label>
+            <input type="text"
+                   id="option_b"
+                   name="option_b"
+                   value="{{ question.option_b }}"
+                   required>
+
+            <label for="option_c">Option C</label>
+            <input type="text"
+                   id="option_c"
+                   name="option_c"
+                   value="{{ question.option_c }}"
+                   required>
+
+            <label for="option_d">Option D</label>
+            <input type="text"
+                   id="option_d"
+                   name="option_d"
+                   value="{{ question.option_d }}"
+                   required>
+
+            <label for="correct_answer">Correct Answer</label>
+
+            <select id="correct_answer"
+                    name="correct_answer"
+                    required>
+
+                <option value="A"
+                    {% if question.correct_answer == "A" %}selected{% endif %}>
+                    Option A
+                </option>
+
+                <option value="B"
+                    {% if question.correct_answer == "B" %}selected{% endif %}>
+                    Option B
+                </option>
+
+                <option value="C"
+                    {% if question.correct_answer == "C" %}selected{% endif %}>
+                    Option C
+                </option>
+
+                <option value="D"
+                    {% if question.correct_answer == "D" %}selected{% endif %}>
+                    Option D
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/admin/questions">
+            ← Back to Manage Questions
+        </a>
+
+    </div>
+
+</body>
+</html>
